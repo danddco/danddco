@@ -38,7 +38,7 @@
     async function cargarProductos() {
       const { data, error } = await supabase
         .from('productos')
-        .select('id, producto, cantidad, precio_venta, precio_magda')
+        .select('id_p, producto, cantidad, precio_venta, precio_magda')
         .order('producto', { ascending: true });
 
       const tbody = document.querySelector('#tabla-productos tbody');
@@ -60,7 +60,7 @@
       data.forEach(p => {
         const fila = document.createElement('tr');
         fila.innerHTML = `
-          <td>${p.id}</td>
+          <td>${p.id_p}</td>
           <td>${p.producto}</td>
           <td>${p.cantidad}</td>
           <td>${p.precio_venta}</td>
