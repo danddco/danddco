@@ -36,39 +36,38 @@
     );
 
     async function cargarProductos() {
-      const { data, error } = await supabase
-        .from('productos')
-        .select('id_p, producto, cantidad, precio_venta, precio_magda')
-        .order('producto', { ascending: true });
+  const { data, error } = await supabase
+    .from('productos')
+    .select('id_p, producto, cantidad, precio_venta, precio_magda')
+    .order('producto', { ascending: true });
 
-      const tbody = document.querySelector('#tabla-productos tbody');
-      const mensajeError = document.getElementById('mensaje-error');
-      tbody.innerHTML = '';
-      mensajeError.textContent = '';
+  console.log("Datos recibidos:", data); // Para verificar en consola
 
-      if (error) {
-        console.error('Error al cargar productos:', error);
-        mensajeError.textContent = 'No se pudieron cargar los productos.';
-        return;
-      }
+  if (error) {
+    console.error('Error al cargar productos:', error);
+    return;
+  }
 
-      if (!data || data.length === 0) {
-        mensajeError.textContent = 'No hay productos disponibles.';
-        return;
-      }
+  const tbody = document.querySelector('#tabla-productos tbody');
+  tbody.innerHTML = '';
 
-      data.forEach(p => {
-        const fila = document.createElement('tr');
-        fila.innerHTML = `
-          <td>${p.id_p}</td>
-          <td>${p.producto}</td>
-          <td>${p.cantidad}</td>
-          <td>${p.precio_venta}</td>
-          <td>${p.precio_magda}</td>
-        `;
-        tbody.appendChild(fila);
-      });
-    }
+  if (!data || data.length === 0) {
+    console.warn('No hay productos disponibles.');
+    return;
+  }
+
+  data.forEach(p => {
+    const fila = document.createElement('tr');
+    fila.innerHTML = `
+      <td>${p.id_p}</td>
+      <td>${p.producto}</td>
+      <td>${p.cantidad}</td>
+      <td>${p.precio_venta}</td>
+      <td>${p.precio_magda}</td>
+    `;
+    tbody.appendChild(fila);
+  });
+}
 
     cargarProductos();
   </script>
