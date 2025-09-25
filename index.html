@@ -1,28 +1,76 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista d444e Productos</title>
-    <style>
-        table { border-collapse: collapse; width: 80%; margin: auto; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
-        th { background-color: #f2f2f2; }
-        body { font-family: Arial, sans-serif; padding: 20px; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Inventario de Productos</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { text-align: center; }
+    table { border-collapse: collapse; width: 80%; margin: auto; background-color: #fff; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    #mensaje-error { text-align: center; color: red; margin-top: 10px; }
+  </style>
 </head>
 <body>
-    <h2 style="text-align:center;">Inventario de Productos</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio Venta</th>
-            <th>Precio Magda</th>
-        </tr>
-<tr><td>5</td><td>Belleza. Peine Piojo</td><td>5</td><td>500</td><td>450</td></tr><tr><td>11</td><td>Belleza. Pintura de Labios</td><td>0</td><td>280</td><td>260</td></tr><tr><td>9</td><td>Cumpleaños. Set de Corona y Banda</td><td>4</td><td>2000</td><td>1800</td></tr><tr><td>4</td><td>Electronica. Calculadora</td><td>2</td><td>1900</td><td>1750</td></tr><tr><td>8</td><td>Electronica. Cepillo de Pelo</td><td>1</td><td>3750</td><td>3400</td></tr><tr><td>7</td><td>Electronica. Protector de Voltaje</td><td>3</td><td>3600</td><td>3400</td></tr><tr><td>3</td><td>Electrónica. Cable B</td><td>9</td><td>420</td><td>400</td></tr><tr><td>6</td><td>Escolares. Goma de Borrar</td><td>5</td><td>85</td><td>70</td></tr><tr><td>10</td><td>Manicuri. Lima de Uñas</td><td>9</td><td>120</td><td>115</td></tr><tr><td>2</td><td>Reposteria. Capacillo.</td><td>1</td><td>1950</td><td>1800</td></tr><tr><td>1</td><td>Transferencia</td><td>5380</td><td>-1</td><td>-1</td></tr>
-    </table>
+  <h2>Inventario de Productos</h2>
+  <div id="mensaje-error"></div>
+  <table id="tabla-productos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Venta</th>
+        <th>Precio Magda</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://TU-PROYECTO.supabase.co',
+      'TU-CLAVE-PUBLICA'
+    );
+
+    async function cargarProductos() {
+      const { data, error } = await supabase
+        .from('productos')
+        .select('id, producto, cantidad, precio_venta, precio_magda')
+        .order('producto', { ascending: true });
+
+      const tbody = document.querySelector('#tabla-productos tbody');
+      const mensajeError = document.getElementById('mensaje-error');
+      tbody.innerHTML = '';
+      mensajeError.textContent = '';
+
+      if (error) {
+        console.error('Error al cargar productos:', error);
+        mensajeError.textContent = 'No se pudieron cargar los productos.';
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        mensajeError.textContent = 'No hay productos disponibles.';
+        return;
+      }
+
+      data.forEach(p => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = `
+          <td>${p.id}</td>
+          <td>${p.producto}</td>
+          <td>${p.cantidad}</td>
+          <td>${p.precio_venta}</td>
+          <td>${p.precio_magda}</td>
+        `;
+        tbody.appendChild(fila);
+      });
+    }
+
+    cargarProductos();
+  </script>
 </body>
 </html>
-
