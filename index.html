@@ -41,8 +41,6 @@
         .select('id_p, producto, cantidad, precio_venta, precio_magda')
         .order('producto', { ascending: true });
 
-      console.log("Datos recibidos:", data); // Para depuración
-
       const tbody = document.querySelector('#tabla-productos tbody');
       const mensajeError = document.getElementById('mensaje-error');
       tbody.innerHTML = '';
