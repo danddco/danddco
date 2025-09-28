@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Abarrotes DandDco</title>
+  <!-- Enlace a Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -40,11 +42,19 @@
       text-decoration: none;
       border-radius: 5px;
       transition: background-color 0.3s ease;
-      text-align: center;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
     }
 
     nav a:hover {
       background-color: #2980b9;
+    }
+
+    nav i {
+      font-size: 18px;
     }
 
     footer {
@@ -61,10 +71,18 @@
   </header>
 
   <nav>
-    <a href="https://danddco.github.io/danddco/Ventas.html" target="_blank">Ventas del Día</a>
-    <a href="https://danddco.github.io/danddco/Finanzas.html" target="_blank">Finanzas</a>
-    <a href="https://danddco.github.io/danddco/existencias.html" target="_blank">Existencias</a>
-    <a href="https://danddco.github.io/danddco/existencias_clientes.html" target="_blank">Productos Clientes</a>
+    <a href="https://danddco.github.io/danddco/Ventas.html" target="_blank">
+      <i class="fas fa-cash-register"></i> Ventas del Día
+    </a>
+    <a href="https://danddco.github.io/danddco/Finanzas.html" target="_blank">
+      <i class="fas fa-chart-line"></i> Finanzas
+    </a>
+    <a href="https://danddco.github.io/danddco/existencias.html" target="_blank">
+      <i class="fas fa-boxes"></i> Existencias
+    </a>
+    <a href="https://danddco.github.io/danddco/existencias_clientes.html" target="_blank">
+      <i class="fas fa-users"></i> Listado Clientes
+    </a>
   </nav>
 
   <footer>
