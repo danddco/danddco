@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Existencia de Productos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f8;
+      padding: 40px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    #buscador {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 80%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+      padding: 12px;
+      text-align: left;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    @media (max-width: 768px) {
+      #buscador { width: 90%; }
+      table { width: 95%; }
+    }
+  </style>
+</head>
+<body>
+  <h2>🛍️ Existencia de Productos</h2>
+  <input type="text" id="buscador" placeholder="Buscar producto...">
+
+  <table id="tablaProductos">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio Venta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Belleza. Cinto Mujer</td><td>900</td></tr><tr><td>Belleza. Felpas</td><td>1</td></tr><tr><td>Belleza. Gargantilla</td><td>350</td></tr><tr><td>Belleza. Lapiz de Ceja Marron</td><td>150</td></tr><tr><td>Belleza. Lapiz de Ceja Negro</td><td>150</td></tr><tr><td>Belleza. Peine Piojo</td><td>500</td></tr><tr><td>Belleza. Pintura de Labios</td><td>280</td></tr><tr><td>Cumpleaños. Globos</td><td>20</td></tr><tr><td>Cumpleaños. Numeros Grandes #42</td><td>600</td></tr><tr><td>Electronica. Cable B</td><td>420</td></tr><tr><td>Electronica. Cable C</td><td>420</td></tr><tr><td>Electronica. Calculadora</td><td>1900</td></tr><tr><td>Electronica. Protector Voltaje</td><td>3600</td></tr><tr><td>Escolares. Goma de Borrar</td><td>85</td></tr><tr><td>Espejuelo. +2.0</td><td>800</td></tr><tr><td>Espejuelo. +3.0 Galeno</td><td>1200</td></tr><tr><td>Espejuelo. +3.5 Galeno</td><td>1200</td></tr><tr><td>Espejuelo. Gafa Oscula Niño </td><td>850</td></tr><tr><td>Espejuelo. Gafa Oscura Niño </td><td>850</td></tr><tr><td>Manicure. Alicate Uña </td><td>700</td></tr><tr><td>Manicure. Cajita de Piedra (Azul)</td><td>850</td></tr><tr><td>Manicure. Joyas por Pareja</td><td>45</td></tr><tr><td>Manicure. Lima de Uña</td><td>120</td></tr><tr><td>Manicure. Maquina de Uña</td><td>3000</td></tr><tr><td>Manicure. Piedras y Joyas A</td><td>250</td></tr><tr><td>Manicure. Piedras y Joyas B</td><td>500</td></tr><tr><td>Manicure. Pinceles Colores</td><td>1000</td></tr><tr><td>Manicure. Pinceles Kolisky</td><td>1300</td></tr><tr><td>Manicure. Pinceles Linear</td><td>400</td></tr><tr><td>Manicure. Uñas en cajita</td><td>400</td></tr><tr><td>Reposteria. Adornos Happy BirthDay</td><td>200</td></tr><tr><td>Reposteria. Capacillo</td><td>1950</td></tr><tr><td>Reposteria. Colorante Azul</td><td>120</td></tr><tr><td>Reposteria. Colorante Rojo</td><td>120</td></tr><tr><td>Reposteria. Colorante Verde</td><td>120</td></tr><tr><td>Reposteria. Juego de Cuchillo</td><td>3500</td></tr><tr><td>Reposteria. Mangas Desechables</td><td>30</td></tr><tr><td>Reposteria. Molde BomBom</td><td>850</td></tr><tr><td>Salud. Bastoncillo Algodon</td><td>250</td></tr><tr><td>Salud. Intima</td><td>30</td></tr><tr><td>Salud. Preservativos</td><td>30</td></tr>
+    </table>
+  </table>
+
+  <script>
+    const buscador = document.getElementById('buscador');
+    const tabla = document.getElementById('tablaProductos').getElementsByTagName('tbody')[0];
+
+    buscador.addEventListener('keyup', function() {
+      const filtro = buscador.value.toLowerCase();
+      const filas = tabla.getElementsByTagName('tr');
+
+      for (let i = 0; i < filas.length; i++) {
+        const celda = filas[i].getElementsByTagName('td')[0];
+        const texto = celda.textContent.toLowerCase();
+        filas[i].style.display = texto.includes(filtro) ? '' : 'none';
+      }
+    });
+  </script>
+</body>
+</html>
+
+
